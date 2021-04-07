@@ -1,0 +1,162 @@
+<head>
+	<style> body { margin: 0; } </style>
+
+	<script src="//unpkg.com/3d-force-graph"></script>
+	<!--<script src="../../dist/3d-force-graph.js"></script>-->
+</head>
+
+<body>
+<div id="3d-graph"></div>
+
+<script>
+	const elem = document.getElementById('3d-graph');
+
+	const Graph = ForceGraph3D()
+	(elem)
+			.graphData({
+  "nodes": [
+    {
+      "id": "f9c2bb48b8a0c5f5120177587e7b1f55"
+    },
+    {
+      "id": "ceeda1df59c0007c5992c3bdc0173776"
+    },
+    {
+      "id": "5a79a912d25fdc999530f8967169c875"
+    },
+    {
+      "id": "8fdd39d205d6445e2c9d6ab52ea1ff56"
+    },
+    {
+      "id": "b338371dc5f4348d6478db3339cea390"
+    },
+    {
+      "id": "84de17aa573239d813fc9ad03e9e1bd1"
+    },
+    {
+      "id": "4f2f7fd11880a34b4a11c30dfd111e66"
+    },
+    {
+      "id": "cf3817cdfbd5bbfae528924bfc1d78fd"
+    },
+    {
+      "id": "593be8f42399ed7079a7c09deb5c6a35"
+    },
+    {
+      "id": "38adafe2cec29999463a3446d39a967a"
+    },
+    {
+      "id": "9a5248068b39cf7719afbe06fcca50e9"
+    },
+    {
+      "id": "52b6b754647873d964e9361232166828"
+    },
+    {
+      "id": "ee13c46028e5d1ced333813a2c103949"
+    },
+    {
+      "id": "5ac38b3167d075284ba68fe65f93418f"
+    },
+    {
+      "id": "1f0b9012122a9631f14bc2331c39e8d0"
+    },
+    {
+      "id": "13e65011b75657215284936507f9ef1e"
+    }
+  ],
+  "links": [
+    {
+      "source": "f9c2bb48b8a0c5f5120177587e7b1f55",
+      "target": "ceeda1df59c0007c5992c3bdc0173776"
+    },
+    {
+      "source": "f9c2bb48b8a0c5f5120177587e7b1f55",
+      "target": "5a79a912d25fdc999530f8967169c875"
+    },
+    {
+      "source": "f9c2bb48b8a0c5f5120177587e7b1f55",
+      "target": "8fdd39d205d6445e2c9d6ab52ea1ff56"
+    },
+    {
+      "source": "f9c2bb48b8a0c5f5120177587e7b1f55",
+      "target": "b338371dc5f4348d6478db3339cea390"
+    },
+    {
+      "source": "f9c2bb48b8a0c5f5120177587e7b1f55",
+      "target": "84de17aa573239d813fc9ad03e9e1bd1"
+    },
+    {
+      "source": "f9c2bb48b8a0c5f5120177587e7b1f55",
+      "target": "4f2f7fd11880a34b4a11c30dfd111e66"
+    },
+    {
+      "source": "f9c2bb48b8a0c5f5120177587e7b1f55",
+      "target": "cf3817cdfbd5bbfae528924bfc1d78fd"
+    },
+    {
+      "source": "f9c2bb48b8a0c5f5120177587e7b1f55",
+      "target": "593be8f42399ed7079a7c09deb5c6a35"
+    },
+    {
+      "source": "38adafe2cec29999463a3446d39a967a",
+      "target": "8fdd39d205d6445e2c9d6ab52ea1ff56"
+    },
+    {
+      "source": "38adafe2cec29999463a3446d39a967a",
+      "target": "ceeda1df59c0007c5992c3bdc0173776"
+    },
+    {
+      "source": "38adafe2cec29999463a3446d39a967a",
+      "target": "9a5248068b39cf7719afbe06fcca50e9"
+    },
+    {
+      "source": "38adafe2cec29999463a3446d39a967a",
+      "target": "52b6b754647873d964e9361232166828"
+    },
+    {
+      "source": "38adafe2cec29999463a3446d39a967a",
+      "target": "ee13c46028e5d1ced333813a2c103949"
+    },
+    {
+      "source": "38adafe2cec29999463a3446d39a967a",
+      "target": "5ac38b3167d075284ba68fe65f93418f"
+    },
+    {
+      "source": "38adafe2cec29999463a3446d39a967a",
+      "target": "1f0b9012122a9631f14bc2331c39e8d0"
+    },
+    {
+      "source": "38adafe2cec29999463a3446d39a967a",
+      "target": "13e65011b75657215284936507f9ef1e"
+    },
+    {
+      "source": "38adafe2cec29999463a3446d39a967a",
+      "target": "5a79a912d25fdc999530f8967169c875"
+    },
+    {
+      "source": "38adafe2cec29999463a3446d39a967a",
+      "target": "4f2f7fd11880a34b4a11c30dfd111e66"
+    }
+  ]
+}
+)
+			.nodeLabel('id')
+            .nodeId('id')
+            .nodeId('id')
+        .linkOpacity(0.5)
+        .linkWidth(2)
+			.nodeAutoColorBy('id')
+			.onNodeHover(node => elem.style.cursor = node ? 'pointer' : null)
+			.onNodeClick(node => {
+				// Aim at node from outside it
+				const distance = 40;
+				const distRatio = 1 + distance/Math.hypot(node.x, node.y, node.z);
+
+				Graph.cameraPosition(
+						{ x: node.x * distRatio, y: node.y * distRatio, z: node.z * distRatio }, // new position
+						node, // lookAt ({ x, y, z })
+						3000  // ms transition duration
+				);
+			});
+</script>
+</body>
